@@ -108,7 +108,7 @@ int main()
 			status[1] += 20;
 			MPPotion--;
 			cout << "\nMp가 20 증가되었습니다. 포션이 1개 차감됩니다." << endl;
-			cout << "현재 Mp: " << status[1] << endl; // stat[0] -> stat[1]
+			cout << "현재 Mp: " << status[1] << endl;
 			cout << "남은 포션 수: " << MPPotion << endl;
 			break;
 
