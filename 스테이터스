@@ -1,0 +1,167 @@
+#include <iostream>
+using namespace std;
+
+void setPotion(int count, int* p_HPPotion, int* p_MPPotion)
+{
+	*p_HPPotion = count;
+	*p_MPPotion = count;
+}
+
+void addPotion(int count, int* p_HPPotion, int* p_MPPotion)
+{
+	*p_HPPotion += count;
+	*p_MPPotion += count;
+}
+
+int main()
+{
+
+	int status[4] = { 0 };
+	// status[0] = Hp
+	// status[1] = MP
+	// status[2] = 공격력
+	// status[3] = 방어력
+
+	//Hp Mp입력
+	while (true)
+	{
+		cout << "Hp와 Mp입력(50 이상): ";
+		cin >> status[0] >> status[1]; 
+
+		if (status[0] >= 50 && status[1] >= 50) // 50도 통과해야하니 >= 사용
+			break;
+
+		cout << "Hp와 MP는 50이상이 되도록 다시 입력하세요.\n";
+	}
+
+	//공격력 입력
+	while (true)
+	{
+		cout << "공격력와 방어력입력(0 초과): ";
+		cin >> status[2] >> status[3];
+
+		if (status[2] > 0 && status[3] > 0) // 이번엔 > 만 사용하여 0이 통과하지 못하게
+			break;
+
+		cout << "공격력와 방어력은 0보다 크도록 다시 입력하세요.\n";
+	}
+
+	cout << "\n===최종 스탯===\n";
+	cout << "Hp: " << status[0] << endl;
+	cout << "Mp: " << status[1] << endl;
+	cout << "공격력: " << status[2] << endl;
+	cout << "방어력: " << status[3] << endl;
+
+	// 게임 루프(메뉴판) 
+	int choice = 0;
+	int HPPotion = 0;
+	int MPPotion = 0;
+	int level = 1; //레벨은 0이 아닌 1이 시작
+
+	setPotion(5, &HPPotion, &MPPotion);
+
+	cout << "\n\n* 포션이 지급되었습니다. (HP, MP 포션 각 5개)" << endl;
+	cout << "=============================================" << endl;
+	cout << "<스탯 관리 시스템>" << endl;
+	
+	while (true)
+	{
+			cout << "\n번호를 선택해주세요: ";
+
+			cout << "\n === 메뉴 ===\n";
+			cout << "1.Hp포션 사용\n";
+			cout << "2.Mp포션 사용\n";
+			cout << "3.공격력 up\n";
+			cout << "4.방어력 up\n";
+			cout << "5.현재 능력치 보기\n";
+			cout << "6.레벨업\n";
+			cout << "7.포션가게 훔쳐오기\n";
+			cout << "0.나가기\n";
+			cout << "번호 선택: ";
+
+			cin >> choice;
+
+			if (choice == 0) {
+				cout << "프로그램을 종료합니다." << endl;
+				break;
+			}
+
+		switch (choice)
+		{
+		case 1:
+			if (HPPotion <= 0) {
+				cout << "포션이 부족합니다." << endl;
+				continue; // Hp포션이 0개인가? 확인하기
+			}
+			status[0] += 20;
+			HPPotion--; // 사용하고 나서 HPPotion 차감하기
+			cout << "\nHp가 20 증가되었습니다. 포션이 1개 차감됩니다." << endl;
+			cout << "현재 Hp: " << status[0] << endl;
+			cout << "남은 포션 수: " << HPPotion << endl;
+			break;
+
+		case 2:
+			if (MPPotion <= 0) {
+				cout << "포션이 부족합니다." << endl;
+				continue;
+			}
+			status[1] += 20;
+			MPPotion--;
+			cout << "\nMp가 20 증가되었습니다. 포션이 1개 차감됩니다." << endl;
+			cout << "현재 Mp: " << status[1] << endl; // stat[0] -> stat[1]
+			cout << "남은 포션 수: " << MPPotion << endl;
+			break;
+
+		case 3:
+			status[2] *= 2;
+			cout << "\n공격력 2배 증가!\n";
+			break;
+
+		case 4:
+			status[3] *= 5;
+			cout << "\n방어력 2배 증가!\n";
+			break;
+
+		case 5:
+			cout << "\n=== 현재 능력치 ===\n";
+			cout << "Level: " << level << endl;
+
+			cout << "Hp: " << status[0] << endl;
+			cout << "Mp: " << status[1] << endl;
+			cout << "공격력: " << status[2] << endl;
+			cout << "방어력: " << status[3] << endl;
+
+			cout << "\n=== 남은 포션 갯수 ===\n";
+			cout << "Hp포션: " << HPPotion << endl;
+			cout << "Mp포션: " << MPPotion << endl;
+			break;
+
+		//레벨 증가 케이스문, Hp,Mp는 포션추가로 대처, 공격력 방어력은 그대로
+		case 6:
+			level++;
+			HPPotion += 1;
+			MPPotion += 1; 
+			status[2] += 10;
+			status[3] += 10;
+			cout << "\n레벨업! 현재 레벨: " << level << endl;
+			break;
+
+		//포션 3개씩 충전해오기 돈이없으니 일단 도둑질해와!
+		case 7:
+			addPotion(3, &HPPotion, &MPPotion);
+			cout << "포션 3개씩 훔치기 완료!" << endl;
+			break;
+
+		case 0:
+			cout << "게임 종료.\n";
+			return 0;
+
+		// 1,2,3,4,5,6,7, 0 키를 제외한 다른키 입력시 디폴트값
+		default:
+			cout << "잘못된 입력입니다.\n";
+			break;
+		}
+	}
+	
+	return 0;
+}
