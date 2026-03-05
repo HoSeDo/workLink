@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Jobchanger/Jobchanger.vcxproj" Id="c2bcf17f-be7f-4705-a3e8-9c391a0bb251" />
+</Solution>
