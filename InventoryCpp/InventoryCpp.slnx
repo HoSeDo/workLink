@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="InventoryCpp/InventoryCpp.vcxproj" Id="dcd6816b-f20f-45bd-8fa5-d8964103238f" />
+</Solution>
