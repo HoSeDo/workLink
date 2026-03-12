@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="PotionShop/PotionShop.vcxproj" Id="868b752d-8ff5-4ed7-996a-4ae3e40bc471" />
+</Solution>
